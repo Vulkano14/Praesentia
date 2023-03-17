@@ -7,7 +7,7 @@ public class CameraMovePlayer : MonoBehaviour
 
     public float mouseSpeed = 1000f;
     public Transform player;
-    float rotationX = 0f;
+    float rotationX;
 
     void Start()
     {
@@ -19,7 +19,7 @@ public class CameraMovePlayer : MonoBehaviour
         
         float mouseX = Input.GetAxis("Mouse X") * mouseSpeed * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSpeed * Time.deltaTime;
-
+        
         rotationX -= mouseY;
 
         transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
