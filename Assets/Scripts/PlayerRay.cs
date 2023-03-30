@@ -13,6 +13,11 @@ public class PlayerRay : MonoBehaviour
 
     public RaycastHit hit;
 
+    public void Start()
+    {
+        pickUpUI.SetActive(false);
+    }
+
     public void Update()
     {
         if(hit.collider != null)

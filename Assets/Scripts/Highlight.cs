@@ -5,7 +5,7 @@ using UnityEngine;
 public class Highlight : MonoBehaviour
 {
     public List<Renderer> renderers;
-    public Color color = Color.white;
+    public Color color = new Color(11f,11f,11f);
     public List<Material> materials;
 
     public void Awake()
