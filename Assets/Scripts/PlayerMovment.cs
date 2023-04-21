@@ -6,6 +6,7 @@ public class PlayerMovment : MonoBehaviour
 {
 
     public CharacterController controller;
+    [SerializeField] GameObject _player;
     public float moveSpeed = 10f;
 
     public Transform groundChecker;
@@ -18,6 +19,11 @@ public class PlayerMovment : MonoBehaviour
 
     bool isGrounded;
 
+    void Start()
+    {
+        _player.SetActive(false);
+        StartCoroutine(PlayerActivation());
+    }
 
     void FixedUpdate()
     {
@@ -37,5 +43,11 @@ public class PlayerMovment : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
          
+    }
+
+    IEnumerator PlayerActivation()
+    {
+        yield return new WaitForSeconds(50);
+        _player.SetActive(true);
     }
 }
