@@ -13,11 +13,14 @@ public class PlayerRay : MonoBehaviour
     [SerializeField] GameObject pickUpUI;
     [SerializeField] GameObject doorUI;
     [SerializeField] GameObject switchUI;
+    [SerializeField] Animator animator;
 
     [Min(1)]
     public float hitRange = 3;
 
     public RaycastHit hit;
+
+    bool _isDoorOpen = false;
 
     public void Start()
     {
@@ -26,8 +29,6 @@ public class PlayerRay : MonoBehaviour
 
     public void Update()
     {
-
-
         if(hit.collider != null)
         {
             hit.collider.GetComponent<Highlight>()?.togHighlight(false);
@@ -43,6 +44,11 @@ public class PlayerRay : MonoBehaviour
         else if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out hit, hitRange, pickLayerMaskDoor))
         {
             doorUI.SetActive(true);
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                OpenDoor(hit.collider.gameObject);
+            }
         }
         else if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out hit, hitRange, pickLayerMaskSwitch))
         {
@@ -50,6 +56,14 @@ public class PlayerRay : MonoBehaviour
             switchUI.SetActive(true);
         }
 
+    }
+
+    void OpenDoor(GameObject door)
+    {
+        if (!_isDoorOpen)
+        {
+            animator.SetBool("door", true);
+        }
     }
 
 }

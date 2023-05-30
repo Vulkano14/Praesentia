@@ -11,9 +11,9 @@ public class frontDoorOpen : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.E))
         {
             _animator.SetBool("doorOpen", true);
         }
