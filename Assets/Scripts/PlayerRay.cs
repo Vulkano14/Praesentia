@@ -20,8 +20,6 @@ public class PlayerRay : MonoBehaviour
 
     public RaycastHit hit;
 
-    bool _isDoorOpen = false;
-
     public void Start()
     {
         pickUpUI.SetActive(false);
@@ -44,11 +42,6 @@ public class PlayerRay : MonoBehaviour
         else if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out hit, hitRange, pickLayerMaskDoor))
         {
             doorUI.SetActive(true);
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                OpenDoor(hit.collider.gameObject);
-            }
         }
         else if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out hit, hitRange, pickLayerMaskSwitch))
         {
@@ -57,13 +50,4 @@ public class PlayerRay : MonoBehaviour
         }
 
     }
-
-    void OpenDoor(GameObject door)
-    {
-        if (!_isDoorOpen)
-        {
-            animator.SetBool("door", true);
-        }
-    }
-
 }
