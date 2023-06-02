@@ -8,7 +8,7 @@ public class ActivationMissionTrigger : MonoBehaviour
     [SerializeField] GameObject _mission;
     [SerializeField] GameObject _quest1;
     [SerializeField] AudioClip soundEffect;
-    [SerializeField] GameObject _missionDisable;
+    [SerializeField] float delay = 8f;
     AudioSource _audioSource;
     bool _hasPlayed = false;
 
@@ -29,8 +29,9 @@ public class ActivationMissionTrigger : MonoBehaviour
 
     IEnumerator ActiveQuest()
     {
+        yield return new WaitForSeconds(delay);
         _audioSource.PlayOneShot(soundEffect);
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         _quest1.SetActive(true);
         yield return new WaitForSeconds(9);
         Destroy(gameObject);

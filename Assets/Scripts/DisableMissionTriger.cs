@@ -24,7 +24,6 @@ public class DisableMissionTriger : MonoBehaviour
 
     IEnumerator DisableQuest()
     {
-        yield return new WaitForSeconds(1);
         _audioSource.PlayOneShot(soundEffect);
         yield return new WaitForSeconds(1);
         _missionDisable.SetActive(false);
