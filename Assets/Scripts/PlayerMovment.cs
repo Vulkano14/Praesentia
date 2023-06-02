@@ -7,6 +7,7 @@ public class PlayerMovment : MonoBehaviour
 
     public CharacterController controller;
     [SerializeField] GameObject _player;
+    public GameObject firstFlashLight;
     public float moveSpeed = 10f;
 
     public Transform groundChecker;
@@ -22,6 +23,7 @@ public class PlayerMovment : MonoBehaviour
     void Start()
     {
         _player.SetActive(false);
+        firstFlashLight.SetActive(false);
         StartCoroutine(PlayerActivation());
     }
 

@@ -15,10 +15,16 @@ public class PlayerRay : MonoBehaviour
     [SerializeField] GameObject switchUI;
     [SerializeField] Animator animator;
 
+    [SerializeField] PlayerMovment _playerMovment;
+
     [Min(1)]
     public float hitRange = 3;
 
     public RaycastHit hit;
+
+    bool _isHoldingItem = false;
+    [SerializeField] GameObject _flashLightInTable;
+
 
     public void Start()
     {
@@ -27,7 +33,16 @@ public class PlayerRay : MonoBehaviour
 
     public void Update()
     {
-        if(hit.collider != null)
+        if (Input.GetKeyDown(KeyCode.E) && !_isHoldingItem)
+        {
+            if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out hit, hitRange, pickLayerMask))
+            {
+                _flashLightInTable.SetActive(false);
+                _playerMovment.firstFlashLight.SetActive(true);
+            }
+        }
+
+        if (hit.collider != null)
         {
             hit.collider.GetComponent<Highlight>()?.togHighlight(false);
             pickUpUI.SetActive(false);
