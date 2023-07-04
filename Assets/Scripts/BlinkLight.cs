@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class BlinkLight : MonoBehaviour
 {
-    public float[] odstêpyCzasowe; // Tablica odstêpów czasowych dla ka¿dego œwiat³a
-    public Light[] œwiat³a; // Tablica œwiate³
+    public float[] odstêpyCzasowe;
+    public Light[] œwiat³a;
 
-    private float[] czasOdOstatniegoMigotania; // Tablica czasu od ostatniego migotania dla ka¿dego œwiat³a
+    private float[] czasOdOstatniegoMigotania;
 
     private void Start()
     {
@@ -22,18 +22,16 @@ public class BlinkLight : MonoBehaviour
         {
             czasOdOstatniegoMigotania[i] += Time.deltaTime;
 
-            // SprawdŸ, czy min¹³ wymagany czas od ostatniego migotania dla danego œwiat³a
             if (czasOdOstatniegoMigotania[i] >= odstêpyCzasowe[i])
             {
                 MigotajSwiat³o(i);
-                czasOdOstatniegoMigotania[i] = 0.0f; // Zresetuj czas od ostatniego migotania dla danego œwiat³a
+                czasOdOstatniegoMigotania[i] = 0.0f;
             }
         }
     }
 
     private void MigotajSwiat³o(int indeks)
     {
-        // Odwróæ stan danego œwiat³a (w³¹czone/wy³¹czone)
         œwiat³a[indeks].enabled = !œwiat³a[indeks].enabled;
     }
 }
