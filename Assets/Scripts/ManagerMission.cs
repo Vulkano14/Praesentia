@@ -50,7 +50,7 @@ public class ManagerMission : MonoBehaviour
         _audioSource.PlayOneShot(_audioMissionEnd);
         yield return new WaitForSeconds(1f);
         _quests[i - 1].SetActive(false);
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(2f);
         StartCoroutine(ActivateMission());
     }
 }

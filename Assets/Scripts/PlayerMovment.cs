@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovment : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class PlayerMovment : MonoBehaviour
 
     bool isGrounded;
 
+    public bool _canMove = true;
+
     void Start()
     {
         _player.SetActive(false);
@@ -29,22 +32,25 @@ public class PlayerMovment : MonoBehaviour
 
     void FixedUpdate()
     {
-        isGrounded = Physics.CheckSphere(groundChecker.position, groundDistance, groundMask);
-
-        if(isGrounded && velocity.y < 0)
+        if (_canMove)
         {
-            velocity.y = -2f;
+            isGrounded = Physics.CheckSphere(groundChecker.position, groundDistance, groundMask);
+
+            if (isGrounded && velocity.y < 0)
+            {
+                velocity.y = -2f;
+            }
+
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+
+            Vector3 movement = transform.right * x + transform.forward * z;
+            controller.Move(movement * moveSpeed * Time.deltaTime);
+
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
         }
-
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-        Vector3 movement = transform.right * x + transform.forward * z;
-        controller.Move(movement * moveSpeed * Time.deltaTime);
-
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
-         
+        
     }
 
     IEnumerator PlayerActivation()

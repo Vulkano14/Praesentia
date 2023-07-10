@@ -7,12 +7,14 @@ public class PlayerRay : MonoBehaviour
     [SerializeField] LayerMask pickLayerMask;
     [SerializeField] LayerMask pickLayerMaskDoor;
     [SerializeField] LayerMask pickLayerMaskSwitch;
+    [SerializeField] LayerMask pickLayerDocument;
 
     public Transform playerCameraTransform;
 
     [SerializeField] GameObject pickUpUI;
     [SerializeField] GameObject doorUI;
     [SerializeField] GameObject switchUI;
+    [SerializeField] GameObject pickUpDocumentUI;
     [SerializeField] Animator animator;
 
     [SerializeField] PlayerMovment _playerMovment;
@@ -48,6 +50,7 @@ public class PlayerRay : MonoBehaviour
             pickUpUI.SetActive(false);
             doorUI.SetActive(false);
             switchUI.SetActive(false);
+            pickUpDocumentUI.SetActive(false);
         }
         if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out hit, hitRange, pickLayerMask))
         {
@@ -57,6 +60,10 @@ public class PlayerRay : MonoBehaviour
         else if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out hit, hitRange, pickLayerMaskDoor))
         {
             doorUI.SetActive(true);
+        }
+        else if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out hit, hitRange, pickLayerDocument))
+        {
+            pickUpDocumentUI.SetActive(true);
         }
         else if (Physics.Raycast(playerCameraTransform.position, playerCameraTransform.forward, out hit, hitRange, pickLayerMaskSwitch))
         {
