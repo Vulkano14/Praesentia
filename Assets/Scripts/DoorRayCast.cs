@@ -41,6 +41,26 @@ public class DoorRayCast : MonoBehaviour
                     _raycastedObj.DocumentPick();
                 }
             }
+
+            if (hit.collider.CompareTag("Document2"))
+            {
+                _raycastedObj = hit.collider.gameObject.GetComponent<MyDoorController>();
+
+                if (Input.GetKeyDown(_openDoorKey))
+                {
+                    _raycastedObj.DocumentPickTwo(); 
+                }
+            }
+
+            if (hit.collider.CompareTag("DocumentTriger"))
+            {
+                _raycastedObj = hit.collider.gameObject.GetComponent<MyDoorController>();
+
+                if (Input.GetKeyDown(_openDoorKey))
+                {
+                    _raycastedObj.DocumentTriger();
+                }
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ public class PlayerMovment : MonoBehaviour
     public CharacterController controller;
     [SerializeField] GameObject _player;
     public GameObject firstFlashLight;
-    public float moveSpeed = 10f;
+    public float moveSpeed = 5f;
 
     public Transform groundChecker;
     public float groundDistance = 0.4f;
@@ -22,9 +22,19 @@ public class PlayerMovment : MonoBehaviour
     bool isGrounded;
 
     public bool _canMove = true;
+    [SerializeField] GameObject _crossHair;
+    [SerializeField] GameObject _lightFlashLight;
+
+    [SerializeField] GameObject _UT1;
+    [SerializeField] GameObject _UT2;
+    [SerializeField] GameObject _UT3;
 
     void Start()
     {
+        _UT1.SetActive(false);
+        _UT2.SetActive(false);
+        _UT3.SetActive(false);
+
         _player.SetActive(false);
         firstFlashLight.SetActive(false);
         StartCoroutine(PlayerActivation());
@@ -32,6 +42,26 @@ public class PlayerMovment : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GAMEMANAGEROPTION.Instance.optionSelectedCroshair)
+        {
+            _crossHair.SetActive(false);
+            _UT1.SetActive(true);
+        }
+
+        if (GAMEMANAGEROPTION.Instance.optionSelectedFlashlight)
+        {
+            _lightFlashLight.SetActive(false);
+            _UT2.SetActive(true);
+        }
+
+        if (GAMEMANAGEROPTION.Instance.optionSelectedSpeed)
+        {
+            moveSpeed = 2f;
+            _UT3.SetActive(true);
+        }
+
+
+
         if (_canMove)
         {
             isGrounded = Physics.CheckSphere(groundChecker.position, groundDistance, groundMask);

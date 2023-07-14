@@ -5,7 +5,7 @@ using UnityEngine;
 public class ActivateAnotherObject : MonoBehaviour
 {
     [SerializeField] GameObject[] _gameObject;
-    
+
     bool _canIActiveGameObject = true;
 
     void Start()
@@ -20,6 +20,7 @@ public class ActivateAnotherObject : MonoBehaviour
     {
         if (other.CompareTag("Player") && _canIActiveGameObject)
         {
+
             foreach (var item in _gameObject)
             {
                 item.SetActive(true);
