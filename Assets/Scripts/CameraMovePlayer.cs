@@ -7,7 +7,8 @@ public class CameraMovePlayer : MonoBehaviour
 
     public float mouseSpeed = 1000f;
     public Transform player;
-    float rotationX = 1f;
+    float rotationX;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -15,13 +16,16 @@ public class CameraMovePlayer : MonoBehaviour
 
     void Update()
     {
+        
         float mouseX = Input.GetAxis("Mouse X") * mouseSpeed * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSpeed * Time.deltaTime;
-
+        
         rotationX -= mouseY;
-        rotationX = Mathf.Clamp(rotationX, -90f, 65f);
 
         transform.localRotation = Quaternion.Euler(rotationX, 0f, 0f);
+        rotationX = Mathf.Clamp(rotationX, -80f, 65f);
+
+        
         player.Rotate(Vector3.up * mouseX);
     }
 }
