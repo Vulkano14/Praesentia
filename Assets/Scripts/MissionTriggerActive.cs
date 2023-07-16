@@ -10,7 +10,6 @@ public class MissionTriggerActive : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(_canActiveTrigger);
 
         if (_canActiveTrigger)
         {

@@ -36,7 +36,7 @@ public class ManagerMission : MonoBehaviour
         }
 
         _audioSource.PlayOneShot(_audioMissionStart);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.2f);
         _quests[i].SetActive(true);
         i++;
 
@@ -48,9 +48,9 @@ public class ManagerMission : MonoBehaviour
         _canIActivateNextMission = false;
 
         _audioSource.PlayOneShot(_audioMissionEnd);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.8f);
         _quests[i - 1].SetActive(false);
-        yield return new WaitForSeconds(7f);
+        yield return new WaitForSeconds(2f);
         StartCoroutine(ActivateMission());
     }
 }
